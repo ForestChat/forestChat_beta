@@ -28,15 +28,15 @@ android {
     flavorDimensions "analytics"
 
     defaultConfig {
-        applicationId "com.moez.QKSMS"
+        applicationId "com.forest.forestchat"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 2218
         versionName "3.9.4"
-        setProperty("archivesBaseName", "QKSMS-v${versionName}")
+        setProperty("archivesBaseName", "ForestChat-v${versionName}")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        setProperty("archivesBaseName", "QKSMS-v${versionName}")
+        setProperty("archivesBaseName", "ForestChat-v${versionName}")
     }
 
     signingConfigs {

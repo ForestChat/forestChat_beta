@@ -18,7 +18,7 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.moez.QKSMS">
+    package="com.forest.forestchat">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -38,7 +38,7 @@
     <uses-permission android:name="android.permission.WRITE_SMS" />
 
     <application
-        android:name=".common.QKApplication"
+        android:name="com.forest.forestchat.common.QKApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -47,7 +47,7 @@
         android:theme="@style/AppLaunchTheme">
 
         <activity
-            android:name=".feature.main.MainActivity"
+            android:name="com.forest.forestchat.feature.main.MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,8 +58,8 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".feature.compose.ComposeActivity"
-            android:parentActivityName=".feature.main.MainActivity">
+            android:name="com.forest.forestchat.feature.compose.ComposeActivity"
+            android:parentActivityName="com.forest.forestchat.feature.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -100,74 +100,74 @@
                 android:name="android.service.chooser.chooser_target_service"
                 android:value=".common.util.QkChooserTargetService" />
         </activity>
-        <activity android:name=".feature.settings.SettingsActivity" />
-        <activity android:name=".feature.plus.PlusActivity" />
+        <activity android:name="com.forest.forestchat.feature.settings.SettingsActivity" />
+        <activity android:name="com.forest.forestchat.feature.plus.PlusActivity" />
         <activity
-            android:name=".feature.gallery.GalleryActivity"
+            android:name="com.forest.forestchat.feature.gallery.GalleryActivity"
             android:theme="@style/AppTheme.Black" />
-        <activity android:name=".feature.conversationinfo.ConversationInfoActivity" />
-        <activity android:name=".feature.notificationprefs.NotificationPrefsActivity" />
-        <activity android:name=".feature.blocking.BlockingActivity" />
+        <activity android:name="com.forest.forestchat.feature.conversationinfo.ConversationInfoActivity" />
+        <activity android:name="com.forest.forestchat.feature.notificationprefs.NotificationPrefsActivity" />
+        <activity android:name="com.forest.forestchat.feature.blocking.BlockingActivity" />
         <activity
-            android:name=".feature.qkreply.QkReplyActivity"
+            android:name="com.forest.forestchat.feature.qkreply.QkReplyActivity"
             android:excludeFromRecents="true"
             android:taskAffinity=""
             android:theme="@style/AppThemeDialog"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".feature.scheduled.ScheduledActivity" />
-        <activity android:name=".feature.backup.BackupActivity" />
-        <activity android:name=".feature.contacts.ContactsActivity" />
+        <activity android:name="com.forest.forestchat.feature.scheduled.ScheduledActivity" />
+        <activity android:name="com.forest.forestchat.feature.backup.BackupActivity" />
+        <activity android:name="com.forest.forestchat.feature.contacts.ContactsActivity" />
 
-        <receiver android:name=".receiver.BootReceiver">
+        <receiver android:name="com.forest.forestchat.receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.DefaultSmsChangedReceiver">
+        <receiver android:name="com.forest.forestchat.receiver.DefaultSmsChangedReceiver">
             <intent-filter>
                 <action android:name="android.provider.action.DEFAULT_SMS_PACKAGE_CHANGED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.DeleteMessagesReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.DeleteMessagesReceiver" />
         <receiver
-            android:name=".receiver.SmsReceiver"
+            android:name="com.forest.forestchat.receiver.SmsReceiver"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_DELIVER" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".receiver.MmsReceiver"
+            android:name="com.forest.forestchat.receiver.MmsReceiver"
             android:permission="android.permission.BROADCAST_WAP_PUSH">
             <intent-filter>
                 <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
                 <data android:mimeType="application/vnd.wap.mms-message" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.SmsSentReceiver" />
-        <receiver android:name=".receiver.SmsDeliveredReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.SmsSentReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.SmsDeliveredReceiver" />
         <receiver
-            android:name=".receiver.MmsSentReceiver"
+            android:name="com.forest.forestchat.receiver.MmsSentReceiver"
             android:taskAffinity="com.moez.QKSMS.MMS_SENT" />
         <receiver
-            android:name=".receiver.MmsUpdatedReceiver"
+            android:name="com.forest.forestchat.receiver.MmsUpdatedReceiver"
             android:taskAffinity="com.moez.QKSMS.MMS_UPDATED" />
         <receiver
-            android:name=".receiver.MmsReceivedReceiver"
+            android:name="com.forest.forestchat.receiver.MmsReceivedReceiver"
             android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED" />
-        <receiver android:name=".receiver.MarkArchivedReceiver" />
-        <receiver android:name=".receiver.BlockThreadReceiver" />
-        <receiver android:name=".receiver.MarkSeenReceiver" />
-        <receiver android:name=".receiver.MarkReadReceiver" />
-        <receiver android:name=".receiver.RemoteMessagingReceiver" />
-        <receiver android:name=".receiver.NightModeReceiver" />
-        <receiver android:name=".receiver.SmsProviderChangedReceiver">
+        <receiver android:name="com.forest.forestchat.receiver.MarkArchivedReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.BlockThreadReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.MarkSeenReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.MarkReadReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.RemoteMessagingReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.NightModeReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.SmsProviderChangedReceiver">
             <intent-filter>
                 <action android:name="android.provider.action.EXTERNAL_PROVIDER_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.SendScheduledMessageReceiver" />
-        <receiver android:name=".feature.widget.WidgetProvider">
+        <receiver android:name="com.forest.forestchat.receiver.SendScheduledMessageReceiver" />
+        <receiver android:name="com.forest.forestchat.feature.widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.moez.QKSMS.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
@@ -177,18 +177,18 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
-        <receiver android:name=".receiver.SendSmsReceiver" />
+        <receiver android:name="com.forest.forestchat.receiver.SendSmsReceiver" />
 
         <service android:name="com.android.mms.transaction.TransactionService" />
-        <service android:name=".feature.backup.RestoreBackupService" />
+        <service android:name="com.forest.forestchat.feature.backup.RestoreBackupService" />
         <service
-            android:name=".feature.widget.WidgetService"
+            android:name="com.forest.forestchat.feature.widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <service
-            android:name=".service.AutoDeleteService"
+            android:name="com.forest.forestchat.service.AutoDeleteService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".service.HeadlessSmsSendService"
+            android:name="com.forest.forestchat.service.HeadlessSmsSendService"
             android:exported="true"
             android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
             <intent-filter>
@@ -202,7 +202,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".common.util.QkChooserTargetService"
+            android:name="com.forest.forestchat.common.util.QkChooserTargetService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
             <intent-filter>
