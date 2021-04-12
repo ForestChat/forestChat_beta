@@ -25,16 +25,13 @@ import com.forest.forestchat.common.base.QkViewModel
 import com.forest.forestchat.common.util.ClipboardUtils
 import com.forest.forestchat.common.util.extensions.makeToast
 import com.forest.forestchat.interactor.SendScheduledMessage
-import com.forest.forestchat.manager.BillingManager
 import com.forest.forestchat.repository.ScheduledMessageRepository
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
-import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
 import javax.inject.Inject
 
 class ScheduledViewModel @Inject constructor(
-    billingManager: BillingManager,
     private val context: Context,
     private val navigator: Navigator,
     private val scheduledMessageRepo: ScheduledMessageRepository,
@@ -42,11 +39,6 @@ class ScheduledViewModel @Inject constructor(
 ) : QkViewModel<ScheduledView, ScheduledState>(ScheduledState(
         scheduledMessages = scheduledMessageRepo.getScheduledMessages()
 )) {
-
-    init {
-        disposables += billingManager.upgradeStatus
-                .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
-    }
 
     override fun bindView(view: ScheduledView) {
         super.bindView(view)
@@ -73,10 +65,6 @@ class ScheduledViewModel @Inject constructor(
         view.composeIntent
                 .autoDisposable(view.scope())
                 .subscribe { navigator.showCompose() }
-
-        view.upgradeIntent
-                .autoDisposable(view.scope())
-                .subscribe { navigator.showQksmsPlusActivity("schedule_fab") }
     }
 
 }

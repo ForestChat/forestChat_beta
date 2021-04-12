@@ -34,12 +34,7 @@ class ThemePagerAdapter @Inject constructor(private val context: Context) : Page
         }
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-            1 -> context.getString(R.string.theme_plus)
-            else -> context.getString(R.string.theme_material)
-        }
-    }
+    override fun getPageTitle(position: Int): CharSequence = context.getString(R.string.theme_material)
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
@@ -49,7 +44,7 @@ class ThemePagerAdapter @Inject constructor(private val context: Context) : Page
     }
 
     override fun getCount(): Int {
-        return 2
+        return 1
     }
 
 }

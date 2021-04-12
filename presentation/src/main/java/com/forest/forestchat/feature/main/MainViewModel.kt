@@ -23,19 +23,8 @@ import com.forest.forestchat.R
 import com.forest.forestchat.common.Navigator
 import com.forest.forestchat.common.base.QkViewModel
 import com.forest.forestchat.extensions.mapNotNull
-import com.forest.forestchat.interactor.DeleteConversations
-import com.forest.forestchat.interactor.MarkAllSeen
-import com.forest.forestchat.interactor.MarkArchived
-import com.forest.forestchat.interactor.MarkPinned
-import com.forest.forestchat.interactor.MarkRead
-import com.forest.forestchat.interactor.MarkUnarchived
-import com.forest.forestchat.interactor.MarkUnpinned
-import com.forest.forestchat.interactor.MarkUnread
-import com.forest.forestchat.interactor.MigratePreferences
-import com.forest.forestchat.interactor.SyncContacts
-import com.forest.forestchat.interactor.SyncMessages
+import com.forest.forestchat.interactor.*
 import com.forest.forestchat.listener.ContactAddedListener
-import com.forest.forestchat.manager.BillingManager
 import com.forest.forestchat.manager.ChangelogManager
 import com.forest.forestchat.manager.PermissionManager
 import com.forest.forestchat.manager.RatingManager
@@ -58,7 +47,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    billingManager: BillingManager,
     contactAddedListener: ContactAddedListener,
     markAllSeen: MarkAllSeen,
     migratePreferences: MigratePreferences,
@@ -94,10 +82,6 @@ class MainViewModel @Inject constructor(
                 .sample(16, TimeUnit.MILLISECONDS)
                 .distinctUntilChanged()
                 .subscribe { syncing -> newState { copy(syncing = syncing) } }
-
-        // Update the upgraded status
-        disposables += billingManager.upgradeStatus
-                .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
 
         // Show the rating UI
         disposables += ratingManager.shouldShowRating
@@ -263,7 +247,6 @@ class MainViewModel @Inject constructor(
                         NavItem.SCHEDULED -> navigator.showScheduled()
                         NavItem.BLOCKING -> navigator.showBlockedConversations()
                         NavItem.SETTINGS -> navigator.showSettings()
-                        NavItem.PLUS -> navigator.showQksmsPlusActivity("main_menu")
                         NavItem.HELP -> navigator.showSupport()
                         NavItem.INVITE -> navigator.showInvite()
                         else -> Unit
@@ -367,13 +350,6 @@ class MainViewModel @Inject constructor(
                 }
                 .autoDisposable(view.scope())
                 .subscribe()
-
-        view.plusBannerIntent
-                .autoDisposable(view.scope())
-                .subscribe {
-                    newState { copy(drawerOpen = false) }
-                    navigator.showQksmsPlusActivity("main_banner")
-                }
 
         view.rateIntent
                 .autoDisposable(view.scope())

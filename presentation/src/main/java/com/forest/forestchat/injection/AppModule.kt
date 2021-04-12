@@ -28,7 +28,6 @@ import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.forest.forestchat.blocking.BlockingClient
 import com.forest.forestchat.blocking.BlockingManager
 import com.forest.forestchat.common.ViewModelFactory
-import com.forest.forestchat.common.util.BillingManagerImpl
 import com.forest.forestchat.common.util.NotificationManagerImpl
 import com.forest.forestchat.common.util.ShortcutManagerImpl
 import com.forest.forestchat.feature.conversationinfo.injection.ConversationInfoComponent
@@ -41,7 +40,6 @@ import com.forest.forestchat.manager.AlarmManager
 import com.forest.forestchat.manager.AlarmManagerImpl
 import com.forest.forestchat.manager.AnalyticsManager
 import com.forest.forestchat.manager.AnalyticsManagerImpl
-import com.forest.forestchat.manager.BillingManager
 import com.forest.forestchat.manager.ChangelogManager
 import com.forest.forestchat.manager.ChangelogManagerImpl
 import com.forest.forestchat.manager.KeyManager
@@ -131,9 +129,6 @@ class AppModule(private var application: Application) {
     fun provideContactAddedListener(listener: ContactAddedListenerImpl): ContactAddedListener = listener
 
     // Manager
-
-    @Provides
-    fun provideBillingManager(manager: BillingManagerImpl): BillingManager = manager
 
     @Provides
     fun provideActiveConversationManager(manager: ActiveConversationManagerImpl): ActiveConversationManager = manager

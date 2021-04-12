@@ -27,9 +27,6 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.RouterTransaction
-import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding2.view.clicks
-import com.jakewharton.rxbinding2.view.longClicks
 import com.forest.forestchat.BuildConfig
 import com.forest.forestchat.R
 import com.forest.forestchat.common.MenuItem
@@ -49,18 +46,20 @@ import com.forest.forestchat.feature.themepicker.ThemePickerController
 import com.forest.forestchat.injection.appComponent
 import com.forest.forestchat.repository.SyncRepository
 import com.forest.forestchat.util.Preferences
+import com.jakewharton.rxbinding2.view.clicks
+import com.jakewharton.rxbinding2.view.longClicks
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import kotlinx.android.synthetic.main.settings_controller.*
 import kotlinx.android.synthetic.main.settings_controller.view.*
 import kotlinx.android.synthetic.main.settings_switch_widget.view.*
 import kotlinx.android.synthetic.main.settings_theme_widget.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.resume
 
@@ -82,7 +81,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
         AutoDeleteDialog(activity!!, autoDeleteSubject::onNext)
     }
 
-    private val viewQksmsPlusSubject: Subject<Unit> = PublishSubject.create()
     private val startTimeSelectedSubject: Subject<Pair<Int, Int>> = PublishSubject.create()
     private val endTimeSelectedSubject: Subject<Pair<Int, Int>> = PublishSubject.create()
     private val signatureSubject: Subject<String> = PublishSubject.create()
@@ -130,8 +128,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
             .let { preferences -> Observable.merge(preferences) }
 
     override fun aboutLongClicks(): Observable<*> = about.longClicks()
-
-    override fun viewQksmsPlusClicks(): Observable<*> = viewQksmsPlusSubject
 
     override fun nightModeSelected(): Observable<Int> = nightModeDialog.adapter.menuItemClicks
 
@@ -200,16 +196,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
                 syncingProgress.max = state.syncProgress.max
                 progressAnimator.apply { setIntValues(syncingProgress.progress, state.syncProgress.progress) }.start()
                 syncingProgress.isIndeterminate = state.syncProgress.indeterminate
-            }
-        }
-    }
-
-    override fun showQksmsPlusSnackbar() {
-        view?.run {
-            Snackbar.make(contentView, R.string.toast_qksms_plus, Snackbar.LENGTH_LONG).run {
-                setAction(R.string.button_more) { viewQksmsPlusSubject.onNext(Unit) }
-                setActionTextColor(colors.theme().theme)
-                show()
             }
         }
     }

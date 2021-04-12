@@ -22,7 +22,6 @@ import com.f2prateek.rx.preferences2.Preference
 import com.forest.forestchat.common.Navigator
 import com.forest.forestchat.common.base.QkPresenter
 import com.forest.forestchat.common.util.Colors
-import com.forest.forestchat.manager.BillingManager
 import com.forest.forestchat.manager.WidgetManager
 import com.forest.forestchat.util.Preferences
 import com.uber.autodispose.android.lifecycle.scope
@@ -35,7 +34,6 @@ import javax.inject.Named
 class ThemePickerPresenter @Inject constructor(
     prefs: Preferences,
     @Named("recipientId") private val recipientId: Long,
-    private val billingManager: BillingManager,
     private val colors: Colors,
     private val navigator: Navigator,
     private val widgetManager: WidgetManager
@@ -76,23 +74,13 @@ class ThemePickerPresenter @Inject constructor(
         // Update the theme, when apply is clicked
         view.applyHsvThemeClicks()
                 .withLatestFrom(view.hsvThemeSelected()) { _, color -> color }
-                .withLatestFrom(billingManager.upgradeStatus) { color, upgraded ->
-                    if (!upgraded) {
-                        view.showQksmsPlusSnackbar()
-                    } else {
-                        theme.set(color)
-                        if (recipientId == 0L) {
-                            widgetManager.updateTheme()
-                        }
+                .autoDisposable(view.scope())
+                .subscribe { color ->
+                    theme.set(color)
+                    if (recipientId == 0L) {
+                        widgetManager.updateTheme()
                     }
                 }
-                .autoDisposable(view.scope())
-                .subscribe()
-
-        // Show QKSMS+ activity
-        view.viewQksmsPlusClicks()
-                .autoDisposable(view.scope())
-                .subscribe { navigator.showQksmsPlusActivity("settings_theme") }
 
         // Reset the theme
         view.clearHsvThemeClicks()

@@ -37,11 +37,9 @@ import com.forest.forestchat.feature.compose.ComposeActivity
 import com.forest.forestchat.feature.conversationinfo.ConversationInfoActivity
 import com.forest.forestchat.feature.gallery.GalleryActivity
 import com.forest.forestchat.feature.notificationprefs.NotificationPrefsActivity
-import com.forest.forestchat.feature.plus.PlusActivity
 import com.forest.forestchat.feature.scheduled.ScheduledActivity
 import com.forest.forestchat.feature.settings.SettingsActivity
 import com.forest.forestchat.manager.AnalyticsManager
-import com.forest.forestchat.manager.BillingManager
 import com.forest.forestchat.manager.NotificationManager
 import com.forest.forestchat.manager.PermissionManager
 import java.io.File
@@ -52,7 +50,6 @@ import javax.inject.Singleton
 class Navigator @Inject constructor(
     private val context: Context,
     private val analyticsManager: AnalyticsManager,
-    private val billingManager: BillingManager,
     private val notificationManager: NotificationManager,
     private val permissions: PermissionManager
 ) {
@@ -68,16 +65,6 @@ class Navigator @Inject constructor(
         } else {
             startActivity(Intent.createChooser(intent, null))
         }
-    }
-
-    /**
-     * @param source String to indicate where this QKSMS+ screen was launched from. This should be
-     * one of [main_menu, compose_schedule, settings_night, settings_theme]
-     */
-    fun showQksmsPlusActivity(source: String) {
-        analyticsManager.track("Viewed QKSMS+", Pair("source", source))
-        val intent = Intent(context, PlusActivity::class.java)
-        startActivity(intent)
     }
 
     /**
@@ -220,9 +207,6 @@ class Navigator @Inject constructor(
                 .append("Version: ${BuildConfig.VERSION_NAME}\n")
                 .append("Device: ${Build.BRAND} ${Build.MODEL}\n")
                 .append("SDK: ${Build.VERSION.SDK_INT}\n")
-                .append("Upgraded"
-                        .takeIf { BuildConfig.FLAVOR != "noAnalytics" }
-                        .takeIf { billingManager.upgradeStatus.blockingFirst() } ?: "")
                 .toString())
         startActivityExternal(intent)
     }

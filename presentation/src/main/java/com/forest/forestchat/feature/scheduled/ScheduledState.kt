@@ -22,6 +22,5 @@ import com.forest.forestchat.model.ScheduledMessage
 import io.realm.RealmResults
 
 data class ScheduledState(
-    val scheduledMessages: RealmResults<ScheduledMessage>? = null,
-    val upgraded: Boolean = false
+    val scheduledMessages: RealmResults<ScheduledMessage>? = null
 )

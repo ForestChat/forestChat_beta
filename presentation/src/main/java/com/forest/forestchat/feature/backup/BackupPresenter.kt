@@ -25,7 +25,6 @@ import com.forest.forestchat.common.base.QkPresenter
 import com.forest.forestchat.common.util.DateFormatter
 import com.forest.forestchat.common.util.extensions.makeToast
 import com.forest.forestchat.interactor.PerformBackup
-import com.forest.forestchat.manager.BillingManager
 import com.forest.forestchat.manager.PermissionManager
 import com.forest.forestchat.repository.BackupRepository
 import com.uber.autodispose.android.lifecycle.scope
@@ -39,7 +38,6 @@ import javax.inject.Inject
 
 class BackupPresenter @Inject constructor(
     private val backupRepo: BackupRepository,
-    private val billingManager: BillingManager,
     private val context: Context,
     private val dateFormatter: DateFormatter,
     private val navigator: Navigator,
@@ -73,9 +71,6 @@ class BackupPresenter @Inject constructor(
                 }
                 .startWith(context.getString(R.string.backup_loading))
                 .subscribe { lastBackup -> newState { copy(lastBackup = lastBackup) } }
-
-        disposables += billingManager.upgradeStatus
-                .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
     }
 
     override fun bindIntents(view: BackupView) {
@@ -89,11 +84,9 @@ class BackupPresenter @Inject constructor(
         view.restoreClicks()
                 .withLatestFrom(
                         backupRepo.getBackupProgress(),
-                        backupRepo.getRestoreProgress(),
-                        billingManager.upgradeStatus)
-                { _, backupProgress, restoreProgress, upgraded ->
+                        backupRepo.getRestoreProgress())
+                { _, backupProgress, restoreProgress ->
                     when {
-                        !upgraded -> context.makeToast(R.string.backup_restore_error_plus)
                         backupProgress.running -> context.makeToast(R.string.backup_restore_error_backup)
                         restoreProgress.running -> context.makeToast(R.string.backup_restore_error_restore)
                         !permissionManager.hasStorage() -> view.requestStoragePermission()
@@ -121,13 +114,11 @@ class BackupPresenter @Inject constructor(
                 .subscribe { backupRepo.stopRestore() }
 
         view.fabClicks()
-                .withLatestFrom(billingManager.upgradeStatus) { _, upgraded -> upgraded }
                 .autoDisposable(view.scope())
-                .subscribe { upgraded ->
+                .subscribe {
                     when {
-                        !upgraded -> navigator.showQksmsPlusActivity("backup_fab")
                         !permissionManager.hasStorage() -> view.requestStoragePermission()
-                        upgraded -> performBackup.execute(Unit)
+                        else -> performBackup.execute(Unit)
                     }
                 }
     }

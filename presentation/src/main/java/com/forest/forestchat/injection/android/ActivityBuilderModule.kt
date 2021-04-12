@@ -31,8 +31,6 @@ import com.forest.forestchat.feature.main.MainActivity
 import com.forest.forestchat.feature.main.MainActivityModule
 import com.forest.forestchat.feature.notificationprefs.NotificationPrefsActivity
 import com.forest.forestchat.feature.notificationprefs.NotificationPrefsActivityModule
-import com.forest.forestchat.feature.plus.PlusActivity
-import com.forest.forestchat.feature.plus.PlusActivityModule
 import com.forest.forestchat.feature.qkreply.QkReplyActivity
 import com.forest.forestchat.feature.qkreply.QkReplyActivityModule
 import com.forest.forestchat.feature.scheduled.ScheduledActivity
@@ -48,10 +46,6 @@ abstract class ActivityBuilderModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun bindMainActivity(): MainActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [PlusActivityModule::class])
-    abstract fun bindPlusActivity(): PlusActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [])

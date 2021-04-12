@@ -31,7 +31,6 @@ import com.forest.forestchat.common.util.FileLoggingTree
 import com.forest.forestchat.injection.AppComponentManager
 import com.forest.forestchat.injection.appComponent
 import com.forest.forestchat.manager.AnalyticsManager
-import com.forest.forestchat.manager.BillingManager
 import com.forest.forestchat.manager.ReferralManager
 import com.forest.forestchat.migration.QkMigration
 import com.forest.forestchat.migration.QkRealmMigration
@@ -61,7 +60,6 @@ class QKApplication : Application(), HasActivityInjector, HasBroadcastReceiverIn
     @Suppress("unused")
     @Inject lateinit var qkMigration: QkMigration
 
-    @Inject lateinit var billingManager: BillingManager
     @Inject lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
     @Inject lateinit var dispatchingBroadcastReceiverInjector: DispatchingAndroidInjector<BroadcastReceiver>
     @Inject lateinit var dispatchingServiceInjector: DispatchingAndroidInjector<Service>
@@ -87,8 +85,6 @@ class QKApplication : Application(), HasActivityInjector, HasBroadcastReceiverIn
 
         GlobalScope.launch(Dispatchers.IO) {
             referralManager.trackReferrer()
-            billingManager.checkForPurchases()
-            billingManager.queryProducts()
         }
 
         nightModeManager.updateCurrentTheme()

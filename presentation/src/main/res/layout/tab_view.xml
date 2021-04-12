@@ -29,4 +29,5 @@
     android:paddingEnd="12dp"
     android:textAllCaps="true"
     android:textStyle="bold"
+    android:text="@string/theme_material"
     app:textSize="secondary" />
