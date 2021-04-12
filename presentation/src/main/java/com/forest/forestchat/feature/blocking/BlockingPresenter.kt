@@ -40,7 +40,7 @@ class BlockingPresenter @Inject constructor(
                     when (client) {
                         Preferences.BLOCKING_MANAGER_SIA -> R.string.blocking_manager_sia_title
                         Preferences.BLOCKING_MANAGER_CC -> R.string.blocking_manager_call_control_title
-                        else -> R.string.blocking_manager_qksms_title
+                        else -> R.string.blocking_manager_forestchat_title
                     }
                 }
                 .map(context::getString)

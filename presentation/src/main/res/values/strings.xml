@@ -62,11 +62,11 @@
     <string name="archived_empty_text">Your archived conversations will appear here</string>
     <string name="main_fab_cd">Start new conversation</string>
     <string name="main_default_sms_title">Love texting again</string>
-    <string name="main_default_sms_message">Make QKSMS your default SMS app</string>
+    <string name="main_default_sms_message">Make ForestChat your default SMS app</string>
     <string name="main_default_sms_change">Change</string>
     <string name="main_permission_required">Permission required</string>
-    <string name="main_permission_sms">QKSMS needs permission to send and view SMS messages</string>
-    <string name="main_permission_contacts">QKSMS needs permission to view your contacts</string>
+    <string name="main_permission_sms">ForestChat needs permission to send and view SMS messages</string>
+    <string name="main_permission_contacts">ForestChat needs permission to view your contacts</string>
     <string name="main_permission_allow">Allow</string>
 
     <string name="drawer_inbox">Inbox</string>
@@ -79,7 +79,7 @@
     <string name="drawer_invite">Invite friends</string>
     <string name="drawer_plus_banner_summary">Unlock amazing new features, and support development</string>
 
-    <string name="rate_title">Enjoying QKSMS?</string>
+    <string name="rate_title">Enjoying ForestChat?</string>
     <string name="rate_summary">Share some love and rate us on Google Play!</string>
     <string name="rate_okay">OKAY!</string>
     <string name="rate_dismiss">DISMISS</string>
@@ -171,7 +171,7 @@
     <string name="backup_restore_stop_title">Stop restore</string>
     <string name="backup_restore_stop_message">Messages that have already been restored will remain on your device</string>
     <string name="backup_restore_dialog_title">Backups</string>
-    <string name="backup_restore_dialog_summary" translatable="false">/QKSMS/Backups</string>
+    <string name="backup_restore_dialog_summary" translatable="false">/ForestChat/Backups</string>
     <string name="backup_restore_dialog_empty">No backups found</string>
     <plurals name="backup_message_count">
         <item quantity="zero">No messages</item>
@@ -204,7 +204,7 @@
 
     <string name="settings_category_appearance">Appearance</string>
     <string name="settings_category_general">General</string>
-    <string name="settings_category_qkreply">QK Reply</string>
+    <string name="settings_category_qkreply">ForestChat Reply</string>
 
     <string name="settings_theme_title">Theme</string>
     <string name="settings_night_title">Night mode</string>
@@ -225,7 +225,7 @@
     <string name="settings_vibration_title">Vibration</string>
     <string name="settings_ringtone_title">Sound</string>
     <string name="settings_ringtone_none">None</string>
-    <string name="settings_qkreply_title">QK Reply</string>
+    <string name="settings_qkreply_title">ForestChat Reply</string>
     <string name="settings_qkreply_summary">Popup for new messages</string>
     <string name="settings_qkreply_tap_dismiss_title">Tap to dismiss</string>
     <string name="settings_qkreply_tap_dismiss_summary">Tap outside of the popup to close it</string>
@@ -268,7 +268,7 @@
     <string name="settings_mms_size_title">Auto-compress MMS attachments</string>
     <string name="settings_sync_title">Sync messages</string>
     <string name="settings_sync_summary">Re-sync your messages with the native Android SMS database</string>
-    <string name="settings_about_title">About QKSMS</string>
+    <string name="settings_about_title">About ForestChat</string>
     <string name="settings_version">Version %s</string>
     <string name="settings_logging_enabled">Debug logging enabled</string>
     <string name="settings_logging_disabled">Debug logging disabled</string>
@@ -281,8 +281,8 @@
     <string name="blocking_conversations">Blocked conversations</string>
 
     <string name="blocking_manager_title">Blocking Manager</string>
-    <string name="blocking_manager_qksms_title">QKSMS</string>
-    <string name="blocking_manager_qksms_summary">Built-in blocking functionality in QKSMS</string>
+    <string name="blocking_manager_forestchat_title">ForestChat</string>
+    <string name="blocking_manager_forestchat_summary">Built-in blocking functionality in ForestChat</string>
     <string name="blocking_manager_call_control_title" translatable="false">Call Control</string>
     <string name="blocking_manager_call_control_summary">Automatically filter your calls and messages in one convenient place! Community IQ™ allows you to prevent unwanted messages from community known spammers</string>
     <string name="blocking_manager_sia_title" translatable="false">Should I Answer?</string>
@@ -335,13 +335,13 @@
     <string name="theme_apply">Apply</string>
 
     <string name="about_developer" translatable="false">Moez Bhatti</string>
-    <string name="about_source" translatable="false">https://github.com/moezbhatti/qksms</string>
-    <string name="about_changelog" translatable="false">https://github.com/moezbhatti/qksms/releases</string>
+    <string name="about_source" translatable="false">https://github.com/moezbhatti/forestchat</string>
+    <string name="about_changelog" translatable="false">https://github.com/moezbhatti/forestchat/releases</string>
     <string name="about_contact" translatable="false">moez@qklabs.com</string>
     <string name="about_license" translatable="false">GNU General Public License v3.0</string>
     <string name="about_copyright" translatable="false">© 2014–2019</string>
 
-    <string name="changelog_title" translatable="false">New in QKSMS</string>
+    <string name="changelog_title" translatable="false">New in ForestChat</string>
     <string name="changelog_version" translatable="false">Version %s</string>
     <string name="changelog_added" translatable="false">Added</string>
     <string name="changelog_improved" translatable="false">Improved</string>
