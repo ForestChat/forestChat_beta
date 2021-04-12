@@ -188,7 +188,6 @@
     <string name="settings_category_qkreply">Réponse QK</string>
     <string name="settings_theme_title">Thème</string>
     <string name="settings_night_title">Mode nuit</string>
-    <string name="settings_black_title">Mode noir pur</string>
     <string name="settings_night_start_title">Heure de début</string>
     <string name="settings_night_end_title">Heure de fin</string>
     <string name="settings_automatic_colors_title">Couleurs de contact automatiques</string>

@@ -165,7 +165,7 @@ class Navigator @Inject constructor(
     }
 
     fun showRating() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.moez.QKSMS"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.forest.forestchat"))
                 .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
                         or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
                         or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
@@ -173,7 +173,7 @@ class Navigator @Inject constructor(
         try {
             startActivityExternal(intent)
         } catch (e: ActivityNotFoundException) {
-            val url = "http://play.google.com/store/apps/details?id=com.moez.QKSMS"
+            val url = "http://play.google.com/store/apps/details?id=com.forest.forestchat"
             startActivityExternal(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
     }

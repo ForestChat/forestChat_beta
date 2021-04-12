@@ -124,9 +124,6 @@ class QkReplyActivity : QkThemedActivity(), QkReplyView {
         return true
     }
 
-    override fun getActivityThemeRes(black: Boolean) = when {
-        black -> R.style.AppThemeDialog_Black
-        else -> R.style.AppThemeDialog
-    }
+    override fun getActivityThemeRes() = R.style.AppThemeDialog
 
 }

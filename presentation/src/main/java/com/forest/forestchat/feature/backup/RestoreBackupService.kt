@@ -41,9 +41,9 @@ class RestoreBackupService : Service() {
     companion object {
         private const val NOTIFICATION_ID = -1
 
-        private const val ACTION_START = "com.moez.QKSMS.ACTION_START"
-        private const val ACTION_STOP = "com.moez.QKSMS.ACTION_STOP"
-        private const val EXTRA_FILE_PATH = "com.moez.QKSMS.EXTRA_FILE_PATH"
+        private const val ACTION_START = "com.forest.forestchat.ACTION_START"
+        private const val ACTION_STOP = "com.forest.forestchat.ACTION_STOP"
+        private const val EXTRA_FILE_PATH = "com.forest.forestchat.EXTRA_FILE_PATH"
 
         fun start(context: Context, filePath: String) {
             val intent = Intent(context, RestoreBackupService::class.java)

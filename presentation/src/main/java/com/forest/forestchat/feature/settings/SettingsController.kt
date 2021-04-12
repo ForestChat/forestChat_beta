@@ -154,9 +154,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
         nightEnd.setVisible(state.nightModeId == Preferences.NIGHT_MODE_AUTO)
         nightEnd.summary = state.nightEnd
 
-        black.setVisible(state.nightModeId != Preferences.NIGHT_MODE_OFF)
-        black.checkbox.isChecked = state.black
-
         autoEmoji.checkbox.isChecked = state.autoEmojiEnabled
 
         delayed.summary = state.sendDelaySummary

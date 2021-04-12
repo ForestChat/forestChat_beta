@@ -148,10 +148,10 @@
         <receiver android:name="com.forest.forestchat.receiver.SmsDeliveredReceiver" />
         <receiver
             android:name="com.forest.forestchat.receiver.MmsSentReceiver"
-            android:taskAffinity="com.moez.QKSMS.MMS_SENT" />
+            android:taskAffinity="com.forest.forestchat.MMS_SENT" />
         <receiver
             android:name="com.forest.forestchat.receiver.MmsUpdatedReceiver"
-            android:taskAffinity="com.moez.QKSMS.MMS_UPDATED" />
+            android:taskAffinity="com.forest.forestchat.MMS_UPDATED" />
         <receiver
             android:name="com.forest.forestchat.receiver.MmsReceivedReceiver"
             android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED" />
@@ -170,7 +170,7 @@
         <receiver android:name="com.forest.forestchat.feature.widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.moez.QKSMS.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
+                <action android:name="com.forest.forestchat.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
             </intent-filter>
 
             <meta-data

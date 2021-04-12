@@ -62,12 +62,10 @@ class WidgetAdapter(intent: Intent) : RemoteViewsService.RemoteViewsFactory {
     private val appWidgetManager by lazy { AppWidgetManager.getInstance(context) }
 
     private val night get() = prefs.night.get()
-    private val black get() = prefs.black.get()
     private val theme get() = colors.theme()
     private val background
         get() = context.getColorCompat(when {
-            night && black -> R.color.black
-            night && !black -> R.color.backgroundDark
+            night -> R.color.backgroundDark
             else -> R.color.white
         })
     private val textPrimary

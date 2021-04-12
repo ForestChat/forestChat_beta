@@ -21,7 +21,7 @@ package com.forest.forestchat.manager
 interface WidgetManager {
 
     companion object {
-        const val ACTION_NOTIFY_DATASET_CHANGED = "com.moez.QKSMS.intent.action.ACTION_NOTIFY_DATASET_CHANGED"
+        const val ACTION_NOTIFY_DATASET_CHANGED = "com.forest.forestchat.intent.action.ACTION_NOTIFY_DATASET_CHANGED"
     }
 
     fun updateUnreadCount()

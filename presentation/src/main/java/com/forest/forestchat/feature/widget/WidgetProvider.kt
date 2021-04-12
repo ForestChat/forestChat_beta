@@ -41,8 +41,10 @@ import javax.inject.Inject
 
 class WidgetProvider : AppWidgetProvider() {
 
-    @Inject lateinit var colors: Colors
-    @Inject lateinit var prefs: Preferences
+    @Inject
+    lateinit var colors: Colors
+    @Inject
+    lateinit var prefs: Preferences
 
     override fun onReceive(context: Context, intent: Intent) {
         AndroidInjection.inject(this, context)
@@ -110,17 +112,14 @@ class WidgetProvider : AppWidgetProvider() {
 
         // Apply colors from theme
         val night = prefs.night.get()
-        val black = prefs.black.get()
 
         remoteViews.setInt(R.id.background, "setColorFilter", context.getColorCompat(when {
-            night && black -> R.color.black
-            night && !black -> R.color.backgroundDark
+            night -> R.color.backgroundDark
             else -> R.color.white
         }))
 
         remoteViews.setInt(R.id.toolbar, "setColorFilter", context.getColorCompat(when {
-            night && black -> R.color.black
-            night && !black -> R.color.backgroundDark
+            night -> R.color.backgroundDark
             else -> R.color.backgroundLight
         }))
 
