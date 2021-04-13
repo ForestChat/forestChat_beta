@@ -44,6 +44,5 @@ interface SettingsView : QkViewContract<SettingsState> {
     suspend fun showAutoDeleteWarningDialog(messages: Int): Boolean
     fun showMmsSizePicker()
     fun showSwipeActions()
-    fun showThemePicker()
     fun showAbout()
 }

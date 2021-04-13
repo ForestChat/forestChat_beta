@@ -101,7 +101,6 @@
                 android:value=".common.util.QkChooserTargetService" />
         </activity>
         <activity android:name="com.forest.forestchat.feature.settings.SettingsActivity" />
-        <activity android:name="com.forest.forestchat.feature.plus.PlusActivity" />
         <activity
             android:name="com.forest.forestchat.feature.gallery.GalleryActivity"
             android:theme="@style/AppTheme.Black" />

@@ -42,7 +42,6 @@ import com.forest.forestchat.common.widget.TextInputDialog
 import com.forest.forestchat.feature.settings.about.AboutController
 import com.forest.forestchat.feature.settings.autodelete.AutoDeleteDialog
 import com.forest.forestchat.feature.settings.swipe.SwipeActionsController
-import com.forest.forestchat.feature.themepicker.ThemePickerController
 import com.forest.forestchat.injection.appComponent
 import com.forest.forestchat.repository.SyncRepository
 import com.forest.forestchat.util.Preferences
@@ -54,9 +53,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.settings_controller.*
-import kotlinx.android.synthetic.main.settings_controller.view.*
 import kotlinx.android.synthetic.main.settings_switch_widget.view.*
-import kotlinx.android.synthetic.main.settings_theme_widget.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
@@ -146,7 +143,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
     override fun mmsSizeSelected(): Observable<Int> = mmsSizeDialog.adapter.menuItemClicks
 
     override fun render(state: SettingsState) {
-        themePreview.setBackgroundTint(state.theme)
         night.summary = state.nightModeSummary
         nightModeDialog.adapter.selectedItem = state.nightModeId
         nightStart.setVisible(state.nightModeId == Preferences.NIGHT_MODE_AUTO)
@@ -236,12 +232,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
     override fun showSwipeActions() {
         router.pushController(RouterTransaction.with(SwipeActionsController())
-                .pushChangeHandler(QkChangeHandler())
-                .popChangeHandler(QkChangeHandler()))
-    }
-
-    override fun showThemePicker() {
-        router.pushController(RouterTransaction.with(ThemePickerController())
                 .pushChangeHandler(QkChangeHandler())
                 .popChangeHandler(QkChangeHandler()))
     }

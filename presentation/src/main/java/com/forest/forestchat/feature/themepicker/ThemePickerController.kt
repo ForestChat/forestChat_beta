@@ -21,8 +21,6 @@ package com.forest.forestchat.feature.themepicker
 import android.animation.ObjectAnimator
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding2.view.clicks
 import com.forest.forestchat.R
 import com.forest.forestchat.common.base.QkController
 import com.forest.forestchat.common.util.Colors
@@ -31,9 +29,8 @@ import com.forest.forestchat.common.util.extensions.setBackgroundTint
 import com.forest.forestchat.common.util.extensions.setVisible
 import com.forest.forestchat.feature.themepicker.injection.ThemePickerModule
 import com.forest.forestchat.injection.appComponent
+import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
-import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.theme_picker_controller.*
 import kotlinx.android.synthetic.main.theme_picker_hsv.*
 import javax.inject.Inject
