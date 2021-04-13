@@ -82,7 +82,7 @@
     <string name="rate_title">Enjoying ForestChat?</string>
     <string name="rate_summary">Share some love and rate us on Google Play!</string>
     <string name="rate_okay">OKAY!</string>
-    <string name="rate_dismiss">DISMISS</string>
+    <string name="rate_dismiss">MAY BE LATER</string>
 
     <string name="dialog_delete_title">Delete</string>
     <plurals name="dialog_delete_message">

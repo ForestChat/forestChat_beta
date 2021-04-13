@@ -186,7 +186,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/rateSummary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/rateTitle"
-                tools:tint="@color/tools_theme" />
+                tools:tint="@color/pinkHeart" />
 
             <com.forest.forestchat.common.widget.QkTextView
                 android:id="@+id/rateTitle"
@@ -226,7 +226,7 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:text="@string/rate_dismiss"
-                android:textColor="?android:attr/textColorTertiary"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/rateOkay"
                 app:layout_constraintTop_toBottomOf="@id/rateSummary"

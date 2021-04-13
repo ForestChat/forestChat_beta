@@ -23,6 +23,7 @@ import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -45,13 +46,7 @@ import com.forest.forestchat.R
 import com.forest.forestchat.common.Navigator
 import com.forest.forestchat.common.androidxcompat.drawerOpen
 import com.forest.forestchat.common.base.QkThemedActivity
-import com.forest.forestchat.common.util.extensions.autoScrollToStart
-import com.forest.forestchat.common.util.extensions.dismissKeyboard
-import com.forest.forestchat.common.util.extensions.resolveThemeColor
-import com.forest.forestchat.common.util.extensions.scrapViews
-import com.forest.forestchat.common.util.extensions.setBackgroundTint
-import com.forest.forestchat.common.util.extensions.setTint
-import com.forest.forestchat.common.util.extensions.setVisible
+import com.forest.forestchat.common.util.extensions.*
 import com.forest.forestchat.feature.blocking.BlockingDialog
 import com.forest.forestchat.feature.changelog.ChangelogDialog
 import com.forest.forestchat.feature.conversations.ConversationItemTouchCallback
@@ -172,7 +167,7 @@ class MainActivity : QkThemedActivity(), MainView {
                     // Miscellaneous views
                     syncingProgress?.progressTintList = ColorStateList.valueOf(theme.theme)
                     syncingProgress?.indeterminateTintList = ColorStateList.valueOf(theme.theme)
-                    rateIcon.setTint(theme.theme)
+                    rateIcon.setTint(getColorCompat(R.color.pinkHeart))
                     compose.setBackgroundTint(theme.theme)
 
                     // Set the FAB compose icon color

@@ -74,7 +74,7 @@
     <string name="rate_title">Vous aimez ForestChat ?</string>
     <string name="rate_summary">Partagez un peu d’amour et évaluez-nous sur le Play Store !</string>
     <string name="rate_okay">OK !</string>
-    <string name="rate_dismiss">ANNULER</string>
+    <string name="rate_dismiss">Peut-être plus tard</string>
     <string name="dialog_delete_title">Supprimer</string>
     <plurals name="dialog_delete_message">
         <item quantity="one">Êtes-vous sûr de vouloir supprimer cette conversation ?</item>
