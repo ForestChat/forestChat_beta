@@ -314,7 +314,6 @@
     <string name="about_version_title">Version</string>
     <string name="about_developer_title">Developer</string>
     <string name="about_source_title">Source code</string>
-    <string name="about_changelog_title">Changelog</string>
     <string name="about_contact_title">Contact</string>
     <string name="about_license_title">License</string>
     <string name="about_copyright_title">Copyright</string>
@@ -333,12 +332,11 @@
     <string name="theme_hex">HEX</string>
     <string name="theme_apply">Apply</string>
 
-    <string name="about_developer" translatable="false">Moez Bhatti</string>
-    <string name="about_source" translatable="false">https://github.com/moezbhatti/forestchat</string>
-    <string name="about_changelog" translatable="false">https://github.com/moezbhatti/forestchat/releases</string>
-    <string name="about_contact" translatable="false">moez@qklabs.com</string>
+    <string name="about_developer" translatable="false">Matthieu Bouquet</string>
+    <string name="about_source" translatable="false">https://github.com/ForestChat/forestChat_tempo</string>
+    <string name="about_contact" translatable="false">contact@forestchat.com</string>
     <string name="about_license" translatable="false">GNU General Public License v3.0</string>
-    <string name="about_copyright" translatable="false">© 2014–2019</string>
+    <string name="about_copyright" translatable="false">© 2021–2022</string>
 
     <string name="changelog_title" translatable="false">New in ForestChat</string>
     <string name="changelog_version" translatable="false">Version %s</string>
