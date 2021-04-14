@@ -42,6 +42,10 @@ import com.forest.forestchat.feature.settings.SettingsActivity
 import com.forest.forestchat.manager.AnalyticsManager
 import com.forest.forestchat.manager.NotificationManager
 import com.forest.forestchat.manager.PermissionManager
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -202,6 +206,10 @@ class Navigator @Inject constructor(
     }
 
     fun showInvite() {
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT) {
+            param(FirebaseAnalytics.Param.ITEM_NAME, "invite")
+        }
+
         analyticsManager.track("Clicked Invite")
         Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
