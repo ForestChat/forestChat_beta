@@ -31,8 +31,8 @@ android {
         applicationId "com.forest.forestchat"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 2218
-        versionName "3.9.4"
+        versionCode 1
+        versionName "1.0.0-beta01"
         setProperty("archivesBaseName", "ForestChat-v${versionName}")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
