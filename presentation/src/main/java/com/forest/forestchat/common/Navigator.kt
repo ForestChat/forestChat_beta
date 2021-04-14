@@ -128,23 +128,18 @@ class Navigator @Inject constructor(
         startActivity(intent)
     }
 
-    fun showDeveloper() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti"))
-        startActivityExternal(intent)
-    }
-
     fun showSourceCode() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti/qksms"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ForestChat/forestChat_beta"))
         startActivityExternal(intent)
     }
 
     fun showChangelog() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti/qksms/releases"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ForestChat/forestChat_beta/releases"))
         startActivityExternal(intent)
     }
 
     fun showLicense() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti/qksms/blob/master/LICENSE"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ForestChat/forestChat_beta/blob/master/LICENSE"))
         startActivityExternal(intent)
     }
 
@@ -156,11 +151,6 @@ class Navigator @Inject constructor(
     fun makePhoneCall(address: String) {
         val action = if (permissions.hasCalling()) Intent.ACTION_CALL else Intent.ACTION_DIAL
         val intent = Intent(action, Uri.parse("tel:$address"))
-        startActivityExternal(intent)
-    }
-
-    fun showDonation() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://bit.ly/QKSMSDonation"))
         startActivityExternal(intent)
     }
 
@@ -199,8 +189,8 @@ class Navigator @Inject constructor(
     fun showSupport() {
         val intent = Intent(Intent.ACTION_SENDTO)
         intent.data = Uri.parse("mailto:")
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("moez@qklabs.com"))
-        intent.putExtra(Intent.EXTRA_SUBJECT, "QKSMS Support")
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("contact@forestchat.com"))
+        intent.putExtra(Intent.EXTRA_SUBJECT, "ForestChat Support")
         intent.putExtra(Intent.EXTRA_TEXT, StringBuilder("\n\n")
                 .append("\n\n--- Please write your message above this line ---\n\n")
                 .append("Package: ${context.packageName}\n")
