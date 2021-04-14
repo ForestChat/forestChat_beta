@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.moez.QKSMS.manager
+package com.forest.forestchat.manager
 
 import android.content.Context
 import com.amplitude.api.Amplitude
 import com.amplitude.api.AmplitudeClient
 import com.amplitude.api.Identify
-import com.moez.QKSMS.data.BuildConfig
+import com.forest.forestchat.data.BuildConfig
 import org.json.JSONArray
 import org.json.JSONObject
 import timber.log.Timber
