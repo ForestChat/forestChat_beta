@@ -333,7 +333,7 @@
     <string name="theme_apply">Apply</string>
 
     <string name="about_source" translatable="false">https://github.com/ForestChat/forestChat_beta</string>
-    <string name="about_contact" translatable="false">contact@forestchat.com</string>
+    <string name="about_contact" translatable="false">contact@forestchat.org</string>
     <string name="about_license" translatable="false">GNU General Public License v3.0</string>
     <string name="about_copyright" translatable="false">© 2021–2022</string>
 
