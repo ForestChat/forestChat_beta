@@ -65,7 +65,7 @@
     <color name="pinkHeart">#EF476F</color>
 
     <!-- This colour should only ever be used for attrs with the tools tag -->
-    <color name="tools_theme">#196051</color>
+    <color name="tools_theme">#00B09D</color>
 
     <array name="random_colors">
         <item>#06C9AF</item>
