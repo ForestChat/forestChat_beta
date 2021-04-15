@@ -47,6 +47,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import java.io.File
+import com.forest.forestchat.R
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -206,14 +207,16 @@ class Navigator @Inject constructor(
     }
 
     fun showInvite() {
-        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT) {
-            param(FirebaseAnalytics.Param.ITEM_NAME, "invite")
+        if (!BuildConfig.DEBUG) {
+            Firebase.analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT) {
+                param(FirebaseAnalytics.Param.ITEM_NAME, "invite")
+            }
         }
 
         analyticsManager.track("Clicked Invite")
         Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, "http://qklabs.com/download")
+                .putExtra(Intent.EXTRA_TEXT, String.format(context.getString(R.string.invite_friend), "http://play.google.com/store/apps/details?id=com.forest.forestchat"))
                 .let { Intent.createChooser(it, null) }
                 .let(::startActivityExternal)
     }

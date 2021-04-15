@@ -439,4 +439,9 @@
         <item>That\'s okay</item>
     </string-array>
 
+    <string name="invite_friend">Do you know this application? I think you might be interested &#128521; : %s</string>
+
+    <string name="dialog_first_launch_title">Hey, welcome to Forestchat!</string>
+    <string name="dialog_first_launch_message">The app is currently in development and features will be added as we go along (voice messages, chat groups, and many more)\nThanks for installing the app, we hope you\'ll like it &#128154;</string>
+
 </resources>

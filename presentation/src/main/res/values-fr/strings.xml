@@ -371,4 +371,10 @@
         <item>LOL</item>
         <item>C\'est d\'accord</item>
     </string-array>
+
+    <string name="invite_friend">Tu connais cette application ? Je pense que ça pourrait t\'intéresser &#128521; : %s</string>
+
+    <string name="dialog_first_launch_title">Hey, Bienvenue sur Forestchat !</string>
+    <string name="dialog_first_launch_message">L\'application est actuellement en phase de développement et des fonctionnalités viendront s\'ajouter au fur et à mesure (messages vocaux, groupes de discussion, et pleins d\'autres)\nMerci d\'avoir installé l\'application, on espère qu\'elle vous plaira &#128154;</string>
+
 </resources>

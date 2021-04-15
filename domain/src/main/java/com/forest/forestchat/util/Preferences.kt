@@ -86,6 +86,8 @@ class Preferences @Inject constructor(
     @Deprecated("This should only be accessed when migrating to @blockingManager")
     val sia = rxPrefs.getBoolean("sia", false)
 
+    val firstLaunch = rxPrefs.getBoolean("firstLaunch", true)
+
     // User configurable
     val sendAsGroup = rxPrefs.getBoolean("sendAsGroup", true)
     val nightMode = rxPrefs.getInteger("nightMode", when (Build.VERSION.SDK_INT >= 29) {

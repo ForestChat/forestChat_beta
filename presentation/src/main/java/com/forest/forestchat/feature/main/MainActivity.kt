@@ -371,6 +371,14 @@ class MainActivity : QkThemedActivity(), MainView {
                 .show()
     }
 
+    override fun showWelcomeDialog() {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.dialog_first_launch_title)
+                .setMessage(R.string.dialog_first_launch_message)
+                .setPositiveButton(R.string.button_continue) { _, _ ->  }
+                .show()
+    }
+
     override fun showChangelog(changelog: ChangelogManager.CumulativeChangelog) {
         changelogDialog.show(changelog)
     }

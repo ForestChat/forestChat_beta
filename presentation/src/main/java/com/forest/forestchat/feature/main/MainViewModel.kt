@@ -426,6 +426,11 @@ class MainViewModel @Inject constructor(
                 }
                 .autoDisposable(view.scope())
                 .subscribe()
+
+        if (prefs.firstLaunch.get()) {
+            prefs.firstLaunch.set(false)
+            view.showWelcomeDialog()
+        }
     }
 
 }
