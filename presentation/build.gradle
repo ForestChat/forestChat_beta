@@ -200,8 +200,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
-    withAnalyticsImplementation "com.android.billingclient:billing:$billing_version"
-    withAnalyticsImplementation "com.android.billingclient:billing-ktx:$billing_version"
     noAnalyticsDebug project(path: ':data', configuration: 'noAnalyticsDebug')
     noAnalyticsRelease project(path: ':data', configuration: 'noAnalyticsRelease')
     withAnalyticsDebug project(path: ':data', configuration: 'withAnalyticsDebug')
