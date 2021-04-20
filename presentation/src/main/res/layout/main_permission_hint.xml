@@ -23,7 +23,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <com.forest.forestchat.common.widget.QkTextView
         android:id="@+id/snackbarTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         app:textSize="primary"
         tools:text="Love texting again" />
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <com.forest.forestchat.common.widget.QkTextView
         android:id="@+id/snackbarMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         app:textSize="secondary"
         tools:text="Make QKSMS your default SMS app" />
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <com.forest.forestchat.common.widget.QkTextView
         android:id="@+id/snackbarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,12 +61,11 @@
         android:background="?attr/selectableItemBackground"
         android:padding="16dp"
         android:textAllCaps="true"
-        android:textColor="@color/tools_theme"
+        android:textColor="#52AFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/snackbarMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/snackbarTitle"
-        app:textColor="theme"
         app:textSize="secondary"
         tools:text="Change" />
 

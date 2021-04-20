@@ -62,8 +62,10 @@
     <color name="switchTrackDisabledLight">#D6D6D6</color>
     <color name="switchTrackDisabledDark">#383838</color>
 
+    <color name="pinkHeart">#EF476F</color>
+
     <!-- This colour should only ever be used for attrs with the tools tag -->
-    <color name="tools_theme">#00838F</color>
+    <color name="tools_theme">#00B09D</color>
 
     <array name="random_colors">
         <item>#06C9AF</item>
