@@ -206,7 +206,7 @@ class Navigator @Inject constructor(
         startActivityExternal(intent)
     }
 
-    fun showInvite() {
+    fun showInvite(context: Activity) {
         if (!BuildConfig.DEBUG) {
             Firebase.analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT) {
                 param(FirebaseAnalytics.Param.ITEM_NAME, "invite")
@@ -214,11 +214,12 @@ class Navigator @Inject constructor(
         }
 
         analyticsManager.track("Clicked Invite")
-        Intent(Intent.ACTION_SEND)
+        val intent = Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
                 .putExtra(Intent.EXTRA_TEXT, String.format(context.getString(R.string.invite_friend), "http://play.google.com/store/apps/details?id=com.forest.forestchat"))
                 .let { Intent.createChooser(it, null) }
-                .let(::startActivityExternal)
+
+        context.startActivityForResult(intent, 42400)
     }
 
     fun addContact(address: String) {

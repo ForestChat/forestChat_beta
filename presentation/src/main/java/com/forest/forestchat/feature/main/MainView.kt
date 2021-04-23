@@ -52,6 +52,7 @@ interface MainView : QkView<MainState> {
     fun showChangelog(changelog: ChangelogManager.CumulativeChangelog)
     fun showArchivedSnackbar()
     fun showWelcomeDialog()
+    fun requestInvite()
 
 }
 

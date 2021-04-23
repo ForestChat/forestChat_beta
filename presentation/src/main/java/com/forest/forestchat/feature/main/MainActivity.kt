@@ -20,17 +20,16 @@ package com.forest.forestchat.feature.main
 
 import android.Manifest
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewStub
+import android.preference.PreferenceManager
+import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
@@ -39,9 +38,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding2.view.clicks
-import com.jakewharton.rxbinding2.widget.textChanges
 import com.forest.forestchat.R
 import com.forest.forestchat.common.Navigator
 import com.forest.forestchat.common.androidxcompat.drawerOpen
@@ -53,6 +49,9 @@ import com.forest.forestchat.feature.conversations.ConversationItemTouchCallback
 import com.forest.forestchat.feature.conversations.ConversationsAdapter
 import com.forest.forestchat.manager.ChangelogManager
 import com.forest.forestchat.repository.SyncRepository
+import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.clicks
+import com.jakewharton.rxbinding2.widget.textChanges
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
 import dagger.android.AndroidInjection
@@ -177,6 +176,20 @@ class MainActivity : QkThemedActivity(), MainView {
         // These theme attributes don't apply themselves on API 21
         if (Build.VERSION.SDK_INT <= 22) {
             toolbarSearch.setBackgroundTint(resolveThemeColor(R.attr.bubbleColor))
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when {
+            requestCode == 42400 && resultCode == Activity.RESULT_OK -> {
+                val sharedPreferences: SharedPreferences = getSharedPreferences(
+                        "shared_preferences_invitation",
+                        Context.MODE_PRIVATE
+                )
+                val numberInvitation = sharedPreferences.getInt("invitationKey", 0)
+                sharedPreferences.edit().putInt("invitationKey", numberInvitation +1).apply()
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
@@ -335,6 +348,10 @@ class MainActivity : QkThemedActivity(), MainView {
 
     override fun requestDefaultSms() {
         navigator.showDefaultSmsDialog(this)
+    }
+
+    override fun requestInvite() {
+        navigator.showInvite(this)
     }
 
     override fun requestPermissions() {
