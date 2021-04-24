@@ -69,6 +69,7 @@
     <string name="drawer_more">Plus</string>
     <string name="drawer_settings">Paramètres</string>
     <string name="drawer_help">Aide &amp; commentaire</string>
+    <string name="drawer_ambassador">Ambassadeurs</string>
     <string name="drawer_invite">Inviter des amis</string>
     <string name="drawer_plus_banner_summary">Débloquer les nouvelles fonctions sensationnelles et soutenir le développement</string>
     <string name="rate_title">Vous aimez ForestChat ?</string>
@@ -376,5 +377,15 @@
 
     <string name="dialog_first_launch_title">Hey, Bienvenue sur Forestchat !</string>
     <string name="dialog_first_launch_message">L\'application est actuellement en phase de développement et des fonctionnalités viendront s\'ajouter au fur et à mesure (messages vocaux, groupes de discussion, et pleins d\'autres)\nMerci d\'avoir installé l\'application, on espère qu\'elle vous plaira &#128154;</string>
+
+    <string name="ambassador_title">Ambassadeur</string>
+    <string name="ambassador_create">Devenir ambassadeur</string>
+    <string name="ambassador_thanks">Merci !</string>
+    <string name="ambassador_share">Vous avez partagé l\'application :</string>
+    <string name="ambassador_times">fois</string>
+    <string name="ambassador_become_ambassador">Devenez ambassadeur ForestChat en partageant votre carte d\’ambassade sur les réseaux sociaux</string>
+    <string name="ambassador_how">Comment devenir ambassadeur ?</string>
+    <string name="ambassador_how_desc1">1/ Partager l\’application via le bouton en bas de l\’écran</string>
+    <string name="ambassador_how_desc2">2/ Partagez votre carte d\’ambassadeur sur les réseaux sociaux</string>
 
 </resources>

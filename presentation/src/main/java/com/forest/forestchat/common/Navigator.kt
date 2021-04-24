@@ -18,6 +18,8 @@
  */
 package com.forest.forestchat.common
 
+import android.Manifest
+import android.R.attr.mimeType
 import android.app.Activity
 import android.app.role.RoleManager
 import android.content.ActivityNotFoundException
@@ -29,8 +31,11 @@ import android.provider.ContactsContract
 import android.provider.Settings
 import android.provider.Telephony
 import android.webkit.MimeTypeMap
+import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.forest.forestchat.BuildConfig
+import com.forest.forestchat.R
+import com.forest.forestchat.feature.ambassador.AmbassadorActivity
 import com.forest.forestchat.feature.backup.BackupActivity
 import com.forest.forestchat.feature.blocking.BlockingActivity
 import com.forest.forestchat.feature.compose.ComposeActivity
@@ -47,16 +52,16 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import java.io.File
-import com.forest.forestchat.R
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 class Navigator @Inject constructor(
-    private val context: Context,
-    private val analyticsManager: AnalyticsManager,
-    private val notificationManager: NotificationManager,
-    private val permissions: PermissionManager
+        private val context: Context,
+        private val analyticsManager: AnalyticsManager,
+        private val notificationManager: NotificationManager,
+        private val permissions: PermissionManager
 ) {
 
     private fun startActivity(intent: Intent) {
@@ -130,6 +135,11 @@ class Navigator @Inject constructor(
 
     fun showSettings() {
         val intent = Intent(context, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun showAmbassadors() {
+        val intent = Intent(context, AmbassadorActivity::class.java)
         startActivity(intent)
     }
 

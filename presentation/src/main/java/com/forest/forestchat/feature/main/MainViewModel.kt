@@ -249,6 +249,7 @@ class MainViewModel @Inject constructor(
                         NavItem.SETTINGS -> navigator.showSettings()
                         NavItem.HELP -> navigator.showSupport()
                         NavItem.INVITE -> view.requestInvite()
+                        NavItem.AMBASSADOR -> navigator.showAmbassadors()
                         else -> Unit
                     }
                     drawerItem

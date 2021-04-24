@@ -18,6 +18,8 @@
  */
 package com.forest.forestchat.injection.android
 
+import com.forest.forestchat.feature.ambassador.AmbassadorActivity
+import com.forest.forestchat.feature.ambassador.AmbassadorActivityModule
 import com.forest.forestchat.feature.backup.BackupActivity
 import com.forest.forestchat.feature.blocking.BlockingActivity
 import com.forest.forestchat.feature.compose.ComposeActivity
@@ -50,6 +52,10 @@ abstract class ActivityBuilderModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [])
     abstract fun bindBackupActivity(): BackupActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [AmbassadorActivityModule::class])
+    abstract fun bindAmbassadorActivity(): AmbassadorActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [ComposeActivityModule::class])

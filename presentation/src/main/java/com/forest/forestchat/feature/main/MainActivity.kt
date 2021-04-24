@@ -26,9 +26,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
+import android.content.res.Resources
+import android.graphics.*
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
@@ -63,18 +64,36 @@ import kotlinx.android.synthetic.main.drawer_view.*
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_permission_hint.*
 import kotlinx.android.synthetic.main.main_syncing.*
+import java.io.File
+import java.io.FileOutputStream
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : QkThemedActivity(), MainView {
 
-    @Inject lateinit var blockingDialog: BlockingDialog
-    @Inject lateinit var disposables: CompositeDisposable
-    @Inject lateinit var navigator: Navigator
-    @Inject lateinit var conversationsAdapter: ConversationsAdapter
-    @Inject lateinit var drawerBadgesExperiment: DrawerBadgesExperiment
-    @Inject lateinit var searchAdapter: SearchAdapter
-    @Inject lateinit var itemTouchCallback: ConversationItemTouchCallback
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var blockingDialog: BlockingDialog
+
+    @Inject
+    lateinit var disposables: CompositeDisposable
+
+    @Inject
+    lateinit var navigator: Navigator
+
+    @Inject
+    lateinit var conversationsAdapter: ConversationsAdapter
+
+    @Inject
+    lateinit var drawerBadgesExperiment: DrawerBadgesExperiment
+
+    @Inject
+    lateinit var searchAdapter: SearchAdapter
+
+    @Inject
+    lateinit var itemTouchCallback: ConversationItemTouchCallback
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override val onNewIntentIntent: Subject<Intent> = PublishSubject.create()
     override val activityResumedIntent: Subject<Boolean> = PublishSubject.create()
@@ -96,7 +115,9 @@ class MainActivity : QkThemedActivity(), MainView {
                 blocking.clicks().map { NavItem.BLOCKING },
                 settings.clicks().map { NavItem.SETTINGS },
                 help.clicks().map { NavItem.HELP },
-                invite.clicks().map { NavItem.INVITE }))
+                invite.clicks().map { NavItem.INVITE },
+                ambassador.clicks().map { NavItem.AMBASSADOR }
+        ))
     }
     override val optionsItemIntent: Subject<Int> = PublishSubject.create()
     override val dismissRatingIntent by lazy { rateDismiss.clicks() }
@@ -187,7 +208,7 @@ class MainActivity : QkThemedActivity(), MainView {
                         Context.MODE_PRIVATE
                 )
                 val numberInvitation = sharedPreferences.getInt("invitationKey", 0)
-                sharedPreferences.edit().putInt("invitationKey", numberInvitation +1).apply()
+                sharedPreferences.edit().putInt("invitationKey", numberInvitation + 1).apply()
             }
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
@@ -392,7 +413,7 @@ class MainActivity : QkThemedActivity(), MainView {
         AlertDialog.Builder(this)
                 .setTitle(R.string.dialog_first_launch_title)
                 .setMessage(R.string.dialog_first_launch_message)
-                .setPositiveButton(R.string.button_continue) { _, _ ->  }
+                .setPositiveButton(R.string.button_continue) { _, _ -> }
                 .show()
     }
 

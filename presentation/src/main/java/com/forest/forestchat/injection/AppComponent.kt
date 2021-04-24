@@ -21,13 +21,7 @@ package com.forest.forestchat.injection
 import com.forest.forestchat.common.QKApplication
 import com.forest.forestchat.common.QkDialog
 import com.forest.forestchat.common.util.QkChooserTargetService
-import com.forest.forestchat.common.widget.AvatarView
-import com.forest.forestchat.common.widget.PagerTitleView
-import com.forest.forestchat.common.widget.PreferenceView
-import com.forest.forestchat.common.widget.QkEditText
-import com.forest.forestchat.common.widget.QkSwitch
-import com.forest.forestchat.common.widget.QkTextView
-import com.forest.forestchat.common.widget.RadioPreferenceView
+import com.forest.forestchat.common.widget.*
 import com.forest.forestchat.feature.backup.BackupController
 import com.forest.forestchat.feature.blocking.BlockingController
 import com.forest.forestchat.feature.blocking.manager.BlockingManagerController

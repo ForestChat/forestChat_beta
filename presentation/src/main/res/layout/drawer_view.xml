@@ -151,6 +151,21 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ambassador"
+            style="@style/DrawerRow">
+
+            <ImageView
+                style="@style/DrawerIcon"
+                android:src="@drawable/ic_logo"
+                android:tint="?android:attr/textColorSecondary" />
+
+            <com.forest.forestchat.common.widget.QkTextView
+                style="@style/DrawerText"
+                android:text="@string/drawer_ambassador" />
+
+        </LinearLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rateLayout"
             android:layout_width="match_parent"
@@ -244,22 +259,23 @@
             android:elevation="5dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_people_black_24dp"
+                android:tint="@color/white" />
 
             <com.forest.forestchat.common.widget.QkTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/drawer_invite"
                 android:textColor="@color/white"
+                android:layout_marginStart="12dp"
+                android:paddingEnd="8dp"
                 android:textStyle="bold"
-                app:textSize="secondary" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_people_black_24dp"
-                android:tint="@color/white" />
+                app:textSize="primary" />
 
         </LinearLayout>
 
