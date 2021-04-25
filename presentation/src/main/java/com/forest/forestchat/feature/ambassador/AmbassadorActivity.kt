@@ -25,8 +25,12 @@ class AmbassadorActivity : QkThemedActivity(), AmbassadorView {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[AmbassadorViewModel::class.java] }
+
     @Inject
     lateinit var navigator: Navigator
+
+    private var isOnStop : Boolean = false
+    private var isInvitationCall : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -39,23 +43,34 @@ class AmbassadorActivity : QkThemedActivity(), AmbassadorView {
             requestAmbassador()
         }
         fabInvitation.setOnClickListener {
+            isInvitationCall = true
             navigator.showInvite(this)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when {
-            requestCode == 42400 && resultCode == Activity.RESULT_OK -> {
+            requestCode == 42400 && isInvitationCall && isOnStop -> {
                 val sharedPreferences: SharedPreferences = getSharedPreferences(
                         "shared_preferences_invitation",
                         Context.MODE_PRIVATE
                 )
-                val numberInvitation = sharedPreferences.getInt("invitationKey", 0)
-                sharedPreferences.edit().putInt("invitationKey", numberInvitation + 1).apply()
+                val numberInvitation = sharedPreferences.getInt("invitationKey", 0) + 1
+                sharedPreferences.edit().putInt("invitationKey", numberInvitation).apply()
 
-                showAmbassador(numberInvitation + 1)
+                showAmbassador(numberInvitation)
             }
             else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+
+        isOnStop = false
+        isInvitationCall = false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (isInvitationCall) {
+            isOnStop = true
         }
     }
 

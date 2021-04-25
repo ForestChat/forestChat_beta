@@ -138,6 +138,9 @@ class MainActivity : QkThemedActivity(), MainView {
     private val syncing by lazy { findViewById<View>(R.id.syncing) }
     private val backPressedSubject: Subject<NavItem> = PublishSubject.create()
 
+    private var isOnStop : Boolean = false
+    private var isInvitationCall : Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -202,7 +205,7 @@ class MainActivity : QkThemedActivity(), MainView {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when {
-            requestCode == 42400 && resultCode == Activity.RESULT_OK -> {
+            requestCode == 42400 && isInvitationCall && isOnStop -> {
                 val sharedPreferences: SharedPreferences = getSharedPreferences(
                         "shared_preferences_invitation",
                         Context.MODE_PRIVATE
@@ -212,6 +215,9 @@ class MainActivity : QkThemedActivity(), MainView {
             }
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
+
+        isOnStop = false
+        isInvitationCall = false
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -354,6 +360,13 @@ class MainActivity : QkThemedActivity(), MainView {
         activityResumedIntent.onNext(false)
     }
 
+    override fun onStop() {
+        super.onStop()
+        if (isInvitationCall) {
+            isOnStop = true
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         disposables.dispose()
@@ -372,6 +385,7 @@ class MainActivity : QkThemedActivity(), MainView {
     }
 
     override fun requestInvite() {
+        isInvitationCall = true
         navigator.showInvite(this)
     }
 

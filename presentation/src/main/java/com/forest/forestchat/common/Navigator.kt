@@ -18,8 +18,6 @@
  */
 package com.forest.forestchat.common
 
-import android.Manifest
-import android.R.attr.mimeType
 import android.app.Activity
 import android.app.role.RoleManager
 import android.content.ActivityNotFoundException
@@ -31,7 +29,6 @@ import android.provider.ContactsContract
 import android.provider.Settings
 import android.provider.Telephony
 import android.webkit.MimeTypeMap
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.forest.forestchat.BuildConfig
 import com.forest.forestchat.R
@@ -63,6 +60,8 @@ class Navigator @Inject constructor(
         private val notificationManager: NotificationManager,
         private val permissions: PermissionManager
 ) {
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     private fun startActivity(intent: Intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -216,20 +215,20 @@ class Navigator @Inject constructor(
         startActivityExternal(intent)
     }
 
-    fun showInvite(context: Activity) {
+    fun showInvite(activity: Activity) {
         if (!BuildConfig.DEBUG) {
-            Firebase.analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT) {
-                param(FirebaseAnalytics.Param.ITEM_NAME, "invite")
+            Firebase.analytics.logEvent("share_application") {
+                param("activity", activity::class.toString())
             }
         }
 
         analyticsManager.track("Clicked Invite")
         val intent = Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, String.format(context.getString(R.string.invite_friend), "http://play.google.com/store/apps/details?id=com.forest.forestchat"))
+                .putExtra(Intent.EXTRA_TEXT, String.format(activity.getString(R.string.invite_friend), "http://play.google.com/store/apps/details?id=com.forest.forestchat"))
                 .let { Intent.createChooser(it, null) }
 
-        context.startActivityForResult(intent, 42400)
+        activity.startActivityForResult(intent, 42400)
     }
 
     fun addContact(address: String) {
