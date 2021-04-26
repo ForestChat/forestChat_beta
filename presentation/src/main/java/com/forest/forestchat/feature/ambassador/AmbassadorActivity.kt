@@ -170,9 +170,9 @@ class AmbassadorActivity : QkThemedActivity(), AmbassadorView {
                 // new antialised Paint
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG)
                 // text color - #FFFFFF
-                paint.color = Color.rgb(255, 255, 255)
+                paint.color = Color.rgb(237, 200, 163)
                 // text size in pixels
-                paint.textSize = 40 * scale
+                paint.textSize = 140 * scale
                 // text shadow
                 paint.setShadowLayer(4f, 0f, 4f, Color.DKGRAY)
 
