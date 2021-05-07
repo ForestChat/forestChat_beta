@@ -116,6 +116,7 @@
         <activity android:name="com.forest.forestchat.feature.scheduled.ScheduledActivity" />
         <activity android:name="com.forest.forestchat.feature.backup.BackupActivity" />
         <activity android:name="com.forest.forestchat.feature.contacts.ContactsActivity" />
+        <activity android:name="com.forest.forestchat.feature.ambassador.AmbassadorActivity" />
 
         <receiver android:name="com.forest.forestchat.receiver.BootReceiver">
             <intent-filter>

@@ -20,17 +20,17 @@ package com.forest.forestchat.feature.main
 
 import android.Manifest
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
-import android.graphics.Color
+import android.content.res.Resources
+import android.graphics.*
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewStub
+import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
@@ -39,9 +39,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding2.view.clicks
-import com.jakewharton.rxbinding2.widget.textChanges
 import com.forest.forestchat.R
 import com.forest.forestchat.common.Navigator
 import com.forest.forestchat.common.androidxcompat.drawerOpen
@@ -53,6 +50,9 @@ import com.forest.forestchat.feature.conversations.ConversationItemTouchCallback
 import com.forest.forestchat.feature.conversations.ConversationsAdapter
 import com.forest.forestchat.manager.ChangelogManager
 import com.forest.forestchat.repository.SyncRepository
+import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.clicks
+import com.jakewharton.rxbinding2.widget.textChanges
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
 import dagger.android.AndroidInjection
@@ -64,18 +64,36 @@ import kotlinx.android.synthetic.main.drawer_view.*
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_permission_hint.*
 import kotlinx.android.synthetic.main.main_syncing.*
+import java.io.File
+import java.io.FileOutputStream
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : QkThemedActivity(), MainView {
 
-    @Inject lateinit var blockingDialog: BlockingDialog
-    @Inject lateinit var disposables: CompositeDisposable
-    @Inject lateinit var navigator: Navigator
-    @Inject lateinit var conversationsAdapter: ConversationsAdapter
-    @Inject lateinit var drawerBadgesExperiment: DrawerBadgesExperiment
-    @Inject lateinit var searchAdapter: SearchAdapter
-    @Inject lateinit var itemTouchCallback: ConversationItemTouchCallback
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var blockingDialog: BlockingDialog
+
+    @Inject
+    lateinit var disposables: CompositeDisposable
+
+    @Inject
+    lateinit var navigator: Navigator
+
+    @Inject
+    lateinit var conversationsAdapter: ConversationsAdapter
+
+    @Inject
+    lateinit var drawerBadgesExperiment: DrawerBadgesExperiment
+
+    @Inject
+    lateinit var searchAdapter: SearchAdapter
+
+    @Inject
+    lateinit var itemTouchCallback: ConversationItemTouchCallback
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override val onNewIntentIntent: Subject<Intent> = PublishSubject.create()
     override val activityResumedIntent: Subject<Boolean> = PublishSubject.create()
@@ -97,7 +115,9 @@ class MainActivity : QkThemedActivity(), MainView {
                 blocking.clicks().map { NavItem.BLOCKING },
                 settings.clicks().map { NavItem.SETTINGS },
                 help.clicks().map { NavItem.HELP },
-                invite.clicks().map { NavItem.INVITE }))
+                invite.clicks().map { NavItem.INVITE },
+                ambassador.clicks().map { NavItem.AMBASSADOR }
+        ))
     }
     override val optionsItemIntent: Subject<Int> = PublishSubject.create()
     override val dismissRatingIntent by lazy { rateDismiss.clicks() }
@@ -117,6 +137,9 @@ class MainActivity : QkThemedActivity(), MainView {
     private val snackbar by lazy { findViewById<View>(R.id.snackbar) }
     private val syncing by lazy { findViewById<View>(R.id.syncing) }
     private val backPressedSubject: Subject<NavItem> = PublishSubject.create()
+
+    private var isOnStop : Boolean = false
+    private var isInvitationCall : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -178,6 +201,23 @@ class MainActivity : QkThemedActivity(), MainView {
         if (Build.VERSION.SDK_INT <= 22) {
             toolbarSearch.setBackgroundTint(resolveThemeColor(R.attr.bubbleColor))
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when {
+            requestCode == 42400 && isInvitationCall && isOnStop -> {
+                val sharedPreferences: SharedPreferences = getSharedPreferences(
+                        "shared_preferences_invitation",
+                        Context.MODE_PRIVATE
+                )
+                val numberInvitation = sharedPreferences.getInt("invitationKey", 0)
+                sharedPreferences.edit().putInt("invitationKey", numberInvitation + 1).apply()
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+
+        isOnStop = false
+        isInvitationCall = false
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -320,6 +360,13 @@ class MainActivity : QkThemedActivity(), MainView {
         activityResumedIntent.onNext(false)
     }
 
+    override fun onStop() {
+        super.onStop()
+        if (isInvitationCall) {
+            isOnStop = true
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         disposables.dispose()
@@ -335,6 +382,11 @@ class MainActivity : QkThemedActivity(), MainView {
 
     override fun requestDefaultSms() {
         navigator.showDefaultSmsDialog(this)
+    }
+
+    override fun requestInvite() {
+        isInvitationCall = true
+        navigator.showInvite(this)
     }
 
     override fun requestPermissions() {
@@ -375,7 +427,7 @@ class MainActivity : QkThemedActivity(), MainView {
         AlertDialog.Builder(this)
                 .setTitle(R.string.dialog_first_launch_title)
                 .setMessage(R.string.dialog_first_launch_message)
-                .setPositiveButton(R.string.button_continue) { _, _ ->  }
+                .setPositiveButton(R.string.button_continue) { _, _ -> }
                 .show()
     }
 

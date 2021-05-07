@@ -31,6 +31,8 @@ import android.provider.Telephony
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
 import com.forest.forestchat.BuildConfig
+import com.forest.forestchat.R
+import com.forest.forestchat.feature.ambassador.AmbassadorActivity
 import com.forest.forestchat.feature.backup.BackupActivity
 import com.forest.forestchat.feature.blocking.BlockingActivity
 import com.forest.forestchat.feature.compose.ComposeActivity
@@ -47,17 +49,19 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import java.io.File
-import com.forest.forestchat.R
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 class Navigator @Inject constructor(
-    private val context: Context,
-    private val analyticsManager: AnalyticsManager,
-    private val notificationManager: NotificationManager,
-    private val permissions: PermissionManager
+        private val context: Context,
+        private val analyticsManager: AnalyticsManager,
+        private val notificationManager: NotificationManager,
+        private val permissions: PermissionManager
 ) {
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     private fun startActivity(intent: Intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -130,6 +134,11 @@ class Navigator @Inject constructor(
 
     fun showSettings() {
         val intent = Intent(context, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun showAmbassadors() {
+        val intent = Intent(context, AmbassadorActivity::class.java)
         startActivity(intent)
     }
 
@@ -206,19 +215,20 @@ class Navigator @Inject constructor(
         startActivityExternal(intent)
     }
 
-    fun showInvite() {
+    fun showInvite(activity: Activity) {
         if (!BuildConfig.DEBUG) {
-            Firebase.analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT) {
-                param(FirebaseAnalytics.Param.ITEM_NAME, "invite")
+            Firebase.analytics.logEvent("share_application") {
+                param("activity", activity::class.toString())
             }
         }
 
         analyticsManager.track("Clicked Invite")
-        Intent(Intent.ACTION_SEND)
+        val intent = Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, String.format(context.getString(R.string.invite_friend), "http://play.google.com/store/apps/details?id=com.forest.forestchat"))
+                .putExtra(Intent.EXTRA_TEXT, String.format(activity.getString(R.string.invite_friend), "http://play.google.com/store/apps/details?id=com.forest.forestchat"))
                 .let { Intent.createChooser(it, null) }
-                .let(::startActivityExternal)
+
+        activity.startActivityForResult(intent, 42400)
     }
 
     fun addContact(address: String) {

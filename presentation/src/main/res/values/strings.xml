@@ -76,6 +76,7 @@
     <string name="drawer_more">More</string>
     <string name="drawer_settings">Settings</string>
     <string name="drawer_help">Help &amp; feedback</string>
+    <string name="drawer_ambassador">Ambassadors</string>
     <string name="drawer_invite">Invite friends</string>
     <string name="drawer_plus_banner_summary">Unlock amazing new features, and support development</string>
 
@@ -443,5 +444,15 @@
 
     <string name="dialog_first_launch_title">Hey, welcome to Forestchat!</string>
     <string name="dialog_first_launch_message">The app is currently in development and features will be added as we go along (voice messages, chat groups, and many more)\nThanks for installing the app, we hope you\'ll like it &#128154;</string>
+
+    <string name="ambassador_title">Ambassador</string>
+    <string name="ambassador_create">Become ambassador</string>
+    <string name="ambassador_thanks">Thanks !</string>
+    <string name="ambassador_share">You shared the app :</string>
+    <string name="ambassador_times">times</string>
+    <string name="ambassador_become_ambassador">Become a ForestChat ambassador by sharing your embassy card on social networks</string>
+    <string name="ambassador_how">How to become an ambassador?</string>
+    <string name="ambassador_how_desc1">1/ Share the application via the button at the bottom of the screen</string>
+    <string name="ambassador_how_desc2">2/ Share your ambassador card on social networks</string>
 
 </resources>

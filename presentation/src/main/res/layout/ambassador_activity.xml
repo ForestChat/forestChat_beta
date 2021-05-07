@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2021 Matthieu <matthieu@forestchat.com>
+  ~
+  ~ This file is part of ForestChat.
+  ~
+  ~ ForestChat is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ ForestChat is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with ForestChat.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            android:animateLayoutChanges="true"
+            android:gravity="center_vertical"
+            android:minHeight="56dp"
+            app:contentInsetStartWithNavigation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.forest.forestchat.common.widget.QkTextView
+                    android:id="@+id/toolbarTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorPrimary"
+                    app:textSize="toolbar"
+                    tools:text="Ambassador" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@drawable/ab_shadow" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ambassadorNoResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorHow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:text="@string/ambassador_how"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorHowDec1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:paddingHorizontal="20dp"
+                android:text="@string/ambassador_how_desc1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ambassadorHow" />
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorHowDec2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:paddingHorizontal="20dp"
+                android:text="@string/ambassador_how_desc2"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ambassadorHowDec1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ambassadorResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorThanks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/ambassador_thanks"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorShare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/ambassador_share"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ambassadorThanks" />
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorShareNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="120dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="50sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ambassadorShare"
+                tools:text="16" />
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorTimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="@string/ambassador_times"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="25sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/ambassadorShareNumber"
+                app:layout_constraintBottom_toBottomOf="@id/ambassadorShareNumber"
+                app:layout_constraintStart_toEndOf="@id/ambassadorShareNumber" />
+
+            <com.forest.forestchat.common.widget.QkTextView
+                android:id="@+id/ambassadorBecome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="120dp"
+                android:gravity="center"
+                android:text="@string/ambassador_become_ambassador"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ambassadorShareNumber" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fabInvitation"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_primary_rectangle_outline_25dp"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/fabIconInvitation"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_people_black_24dp"
+            android:tint="@color/white" />
+
+        <com.forest.forestchat.common.widget.QkTextView
+            android:id="@+id/fabLabelInvitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:paddingEnd="8dp"
+            android:text="@string/drawer_invite"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:textSize="primary" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fabAmbassador"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_primary_rectangle_outline_25dp"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/fabIconAmbassador"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_logo"
+            android:tint="@color/white" />
+
+        <com.forest.forestchat.common.widget.QkTextView
+            android:id="@+id/fabLabelAmbassador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:paddingEnd="8dp"
+            android:text="@string/ambassador_create"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:textSize="primary" />
+
+    </LinearLayout>
+
+</FrameLayout>
