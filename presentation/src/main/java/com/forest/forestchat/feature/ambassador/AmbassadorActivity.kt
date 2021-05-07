@@ -1,6 +1,23 @@
+/*
+ * Copyright (C) 2021 Matthieu <matthieu@forestchat.org>
+ *
+ * This file is part of ForestChat.
+ *
+ * ForestChat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ForestChat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ForestChat.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.forest.forestchat.feature.ambassador
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -25,8 +42,12 @@ class AmbassadorActivity : QkThemedActivity(), AmbassadorView {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[AmbassadorViewModel::class.java] }
+
     @Inject
     lateinit var navigator: Navigator
+
+    private var isOnStop : Boolean = false
+    private var isInvitationCall : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -39,23 +60,34 @@ class AmbassadorActivity : QkThemedActivity(), AmbassadorView {
             requestAmbassador()
         }
         fabInvitation.setOnClickListener {
+            isInvitationCall = true
             navigator.showInvite(this)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when {
-            requestCode == 42400 && resultCode == Activity.RESULT_OK -> {
+            requestCode == 42400 && isInvitationCall && isOnStop -> {
                 val sharedPreferences: SharedPreferences = getSharedPreferences(
                         "shared_preferences_invitation",
                         Context.MODE_PRIVATE
                 )
-                val numberInvitation = sharedPreferences.getInt("invitationKey", 0)
-                sharedPreferences.edit().putInt("invitationKey", numberInvitation + 1).apply()
+                val numberInvitation = sharedPreferences.getInt("invitationKey", 0) + 1
+                sharedPreferences.edit().putInt("invitationKey", numberInvitation).apply()
 
-                showAmbassador(numberInvitation + 1)
+                showAmbassador(numberInvitation)
             }
             else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+
+        isOnStop = false
+        isInvitationCall = false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (isInvitationCall) {
+            isOnStop = true
         }
     }
 
@@ -138,9 +170,9 @@ class AmbassadorActivity : QkThemedActivity(), AmbassadorView {
                 // new antialised Paint
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG)
                 // text color - #FFFFFF
-                paint.color = Color.rgb(255, 255, 255)
+                paint.color = Color.rgb(237, 200, 163)
                 // text size in pixels
-                paint.textSize = 40 * scale
+                paint.textSize = 140 * scale
                 // text shadow
                 paint.setShadowLayer(4f, 0f, 4f, Color.DKGRAY)
 
