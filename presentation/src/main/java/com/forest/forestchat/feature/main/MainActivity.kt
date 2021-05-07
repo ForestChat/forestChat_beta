@@ -270,38 +270,65 @@ class MainActivity : QkThemedActivity(), MainView {
 
         rateLayout.setVisible(state.showRating)
 
-        compose.setVisible(state.page is Inbox || state.page is Archived)
-        conversationsAdapter.emptyView = empty.takeIf { state.page is Inbox || state.page is Archived }
-        searchAdapter.emptyView = empty.takeIf { state.page is Searching }
+        if (!state.defaultSms) {
+            defaultSmsLayout.setVisible(true)
+            defaultViewLayout.setVisible(false)
 
-        when (state.page) {
-            is Inbox -> {
-                showBackButton(state.page.selected > 0)
-                title = getString(R.string.main_title_selected, state.page.selected)
-                if (recyclerView.adapter !== conversationsAdapter) recyclerView.adapter = conversationsAdapter
-                conversationsAdapter.updateData(state.page.data)
-                itemTouchHelper.attachToRecyclerView(recyclerView)
-                empty.setText(R.string.inbox_empty_text)
-            }
+            changeToDefault.setBackgroundTint(colors.theme().theme)
+            changeToDefault.setOnClickListener { requestDefaultSms() }
+            snackbar.isVisible = false
+        } else {
+            defaultSmsLayout.setVisible(false)
+            defaultViewLayout.setVisible(true)
 
-            is Searching -> {
-                showBackButton(true)
-                if (recyclerView.adapter !== searchAdapter) recyclerView.adapter = searchAdapter
-                searchAdapter.data = state.page.data ?: listOf()
-                itemTouchHelper.attachToRecyclerView(null)
-                empty.setText(R.string.inbox_search_empty_text)
-            }
+            compose.setVisible(state.page is Inbox || state.page is Archived)
+            conversationsAdapter.emptyView = empty.takeIf { state.page is Inbox || state.page is Archived }
+            searchAdapter.emptyView = empty.takeIf { state.page is Searching }
 
-            is Archived -> {
-                showBackButton(state.page.selected > 0)
-                title = when (state.page.selected != 0) {
-                    true -> getString(R.string.main_title_selected, state.page.selected)
-                    false -> getString(R.string.title_archived)
+            when (state.page) {
+                is Inbox -> {
+                    showBackButton(state.page.selected > 0)
+                    title = getString(R.string.main_title_selected, state.page.selected)
+                    if (recyclerView.adapter !== conversationsAdapter) recyclerView.adapter = conversationsAdapter
+                    conversationsAdapter.updateData(state.page.data)
+                    itemTouchHelper.attachToRecyclerView(recyclerView)
+                    empty.setText(R.string.inbox_empty_text)
                 }
-                if (recyclerView.adapter !== conversationsAdapter) recyclerView.adapter = conversationsAdapter
-                conversationsAdapter.updateData(state.page.data)
-                itemTouchHelper.attachToRecyclerView(null)
-                empty.setText(R.string.archived_empty_text)
+
+                is Searching -> {
+                    showBackButton(true)
+                    if (recyclerView.adapter !== searchAdapter) recyclerView.adapter = searchAdapter
+                    searchAdapter.data = state.page.data ?: listOf()
+                    itemTouchHelper.attachToRecyclerView(null)
+                    empty.setText(R.string.inbox_search_empty_text)
+                }
+
+                is Archived -> {
+                    showBackButton(state.page.selected > 0)
+                    title = when (state.page.selected != 0) {
+                        true -> getString(R.string.main_title_selected, state.page.selected)
+                        false -> getString(R.string.title_archived)
+                    }
+                    if (recyclerView.adapter !== conversationsAdapter) recyclerView.adapter = conversationsAdapter
+                    conversationsAdapter.updateData(state.page.data)
+                    itemTouchHelper.attachToRecyclerView(null)
+                    empty.setText(R.string.archived_empty_text)
+                }
+            }
+
+            when (state.syncing) {
+                is SyncRepository.SyncProgress.Idle -> {
+                    syncing.isVisible = false
+                    snackbar.isVisible = !state.defaultSms || !state.smsPermission || !state.contactPermission
+                }
+
+                is SyncRepository.SyncProgress.Running -> {
+                    syncing.isVisible = true
+                    syncingProgress.max = state.syncing.max
+                    progressAnimator.apply { setIntValues(syncingProgress.progress, state.syncing.progress) }.start()
+                    syncingProgress.isIndeterminate = state.syncing.indeterminate
+                    snackbar.isVisible = false
+                }
             }
         }
 
@@ -312,21 +339,6 @@ class MainActivity : QkThemedActivity(), MainView {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else if (!drawerLayout.isDrawerVisible(GravityCompat.START) && state.drawerOpen) {
             drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        when (state.syncing) {
-            is SyncRepository.SyncProgress.Idle -> {
-                syncing.isVisible = false
-                snackbar.isVisible = !state.defaultSms || !state.smsPermission || !state.contactPermission
-            }
-
-            is SyncRepository.SyncProgress.Running -> {
-                syncing.isVisible = true
-                syncingProgress.max = state.syncing.max
-                progressAnimator.apply { setIntValues(syncingProgress.progress, state.syncing.progress) }.start()
-                syncingProgress.isIndeterminate = state.syncing.indeterminate
-                snackbar.isVisible = false
-            }
         }
 
         when {
