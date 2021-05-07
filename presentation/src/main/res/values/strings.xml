@@ -455,7 +455,7 @@
     <string name="ambassador_how_desc1">1/ Share the application via the button at the bottom of the screen</string>
     <string name="ambassador_how_desc2">2/ Share your ambassador card on social networks</string>
 
-    <string name="home_sms_default">More than choosing ForestChat as the default application.\n\n
-    Do not panic ! You will find all your SMS here and you can go back to your old application whenever you want.</string>
+    <string name="home_sms_default">Now, all you have to do is to choose ForestChat as your default application.\n\n
+    Don\'t panic! You will find all your SMS here and you can go back to your old application whenever you want.</string>
 
 </resources>
